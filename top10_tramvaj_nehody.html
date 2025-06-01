@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_38f6597d80f498965605e766c53da223 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 440px;
+    max-height: 520px;
+    overflow-y: auto;
+    background-color: white;
+    border: 2px solid gray;
+    padding: 10px;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+">
+<h4 style="text-align:center; margin-top:0; margin-bottom:10px;">Top 10 nejproblematičtějších úseku z pohledu tramvají</h4>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 420px;
+            font-size: 13px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 6px 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        tbody {
+            display: block;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        thead, tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+    </style>
+    <table><thead><tr><th>Cluster</th><th>Počet nehod celkovo</th><th>Počet nehod s tramvají</th></tr></thead><tbody><tr><td>Brno-střed_175</td><td>9</td><td>5</td></tr><tr><td>Brno-střed_660</td><td>9</td><td>5</td></tr><tr><td>Brno-střed_727</td><td>11</td><td>5</td></tr><tr><td>Brno-střed_1408</td><td>7</td><td>5</td></tr><tr><td>Brno-střed_233</td><td>12</td><td>5</td></tr><tr><td>Brno-střed_1355</td><td>8</td><td>4</td></tr><tr><td>Brno-sever_202</td><td>7</td><td>4</td></tr><tr><td>Královo Pole_396</td><td>9</td><td>4</td></tr><tr><td>Brno-střed_641</td><td>17</td><td>3</td></tr><tr><td>Brno-střed_1354</td><td>6</td><td>3</td></tr></tbody></table>
+</div>
+    
+            <div class="folium-map" id="map_38f6597d80f498965605e766c53da223" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_38f6597d80f498965605e766c53da223 = L.map(
+                "map_38f6597d80f498965605e766c53da223",
+                {
+                    center: [49.19828413196576, 16.605177614025916],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0b35390db50bd572cae816cf9db91087 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0b35390db50bd572cae816cf9db91087.addTo(map_38f6597d80f498965605e766c53da223);
+        
+    
+            var feature_group_d74ebe0affb5d75198aafd2398d62df9 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_ffca3de3c4d149ee550021236ab62cd1 = L.circleMarker(
+                [49.20009906258281, 16.62600223332891],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_ffca3de3c4d149ee550021236ab62cd1.bindTooltip(
+                `<div>
+                     Cluster: Brno-sever_202<br>Nehody s tramvají: 4<br>Celkovo nehôd: 7
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a79a3f297c254085dda7336fb620ec29 = L.circleMarker(
+                [49.187808643396714, 16.594226777647403],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_a79a3f297c254085dda7336fb620ec29.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_1354<br>Nehody s tramvají: 3<br>Celkovo nehôd: 6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_73da8d18cf4550ad971ae1d0957c0206 = L.circleMarker(
+                [49.1874071338968, 16.594446294212904],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_73da8d18cf4550ad971ae1d0957c0206.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_1355<br>Nehody s tramvají: 4<br>Celkovo nehôd: 8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f0d54ab9bc035b8c236a088f7b6a63d9 = L.circleMarker(
+                [49.18012735257143, 16.59519225655344],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_f0d54ab9bc035b8c236a088f7b6a63d9.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_1408<br>Nehody s tramvají: 5<br>Celkovo nehôd: 7
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3073fdf7d5d6b91e9543dc5e3e3330a3 = L.circleMarker(
+                [49.191078103200816, 16.611573821640647],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_3073fdf7d5d6b91e9543dc5e3e3330a3.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_175<br>Nehody s tramvají: 5<br>Celkovo nehôd: 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c6eb0d8af65d7aef4ba9158df303a392 = L.circleMarker(
+                [49.19196949520343, 16.618165427593432],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_c6eb0d8af65d7aef4ba9158df303a392.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_233<br>Nehody s tramvají: 5<br>Celkovo nehôd: 12
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3af11310aa2e7ec38609236f9c451194 = L.circleMarker(
+                [49.20776056060464, 16.60410332733521],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_3af11310aa2e7ec38609236f9c451194.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_641<br>Nehody s tramvají: 3<br>Celkovo nehôd: 17
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac992c179d46b9dc6d76cb872c0bf830 = L.circleMarker(
+                [49.205853126065534, 16.605450625056527],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_ac992c179d46b9dc6d76cb872c0bf830.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_660<br>Nehody s tramvají: 5<br>Celkovo nehôd: 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c4ee2874f65b5c0c82d5ce3200504da8 = L.circleMarker(
+                [49.20309679451648, 16.607003153568943],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_c4ee2874f65b5c0c82d5ce3200504da8.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_727<br>Nehody s tramvají: 5<br>Celkovo nehôd: 11
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_080298e909df7e5a892367faba0cc3b7 = L.circleMarker(
+                [49.23042169071347, 16.578124504956612],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d74ebe0affb5d75198aafd2398d62df9);
+        
+    
+            circle_marker_080298e909df7e5a892367faba0cc3b7.bindTooltip(
+                `<div>
+                     Cluster: Královo Pole_396<br>Nehody s tramvají: 4<br>Celkovo nehôd: 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_d74ebe0affb5d75198aafd2398d62df9.addTo(map_38f6597d80f498965605e766c53da223);
+        
+    
+            var feature_group_ad09351cec776d906bd5e2f843a06cf7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_bd2e9c416aacab88bdb3b76f02d6718b = L.circleMarker(
+                [49.19101614977185, 16.61171304229911],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_bd2e9c416aacab88bdb3b76f02d6718b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000019<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0580289b834006138b5b3859ca01d464 = L.circleMarker(
+                [49.19199420244728, 16.61824499526139],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_0580289b834006138b5b3859ca01d464.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000270<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e9b2cc847186755242a72b7ff1b07fa7 = L.circleMarker(
+                [49.20591342100738, 16.60545961201007],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e9b2cc847186755242a72b7ff1b07fa7.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000278<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8aa43483ea51818992cdb2dbe52782ff = L.circleMarker(
+                [49.20026477716628, 16.6258400058764],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_8aa43483ea51818992cdb2dbe52782ff.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000436<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_126d6f076b8ff347b2c5ab9d29b48a3c = L.circleMarker(
+                [49.202976629787926, 16.607159084851887],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_126d6f076b8ff347b2c5ab9d29b48a3c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000489<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aec6b2e75a8a8994f7c3bb8b837b7717 = L.circleMarker(
+                [49.20777686242028, 16.60418564676338],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_aec6b2e75a8a8994f7c3bb8b837b7717.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000650<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b2ac3bb2079b74cfa58e48cc93dcae5d = L.circleMarker(
+                [49.18001619953633, 16.595155967201197],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_b2ac3bb2079b74cfa58e48cc93dcae5d.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001018<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1c057dfc7ed43036efa97bf4a6642857 = L.circleMarker(
+                [49.19198307941015, 16.618343430743337],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_1c057dfc7ed43036efa97bf4a6642857.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001135<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b60ab2943d522a3fd37ca445681cb12f = L.circleMarker(
+                [49.18781847994856, 16.594211952984253],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_b60ab2943d522a3fd37ca445681cb12f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001227<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f125d8d48ab3d43d48c52a16d549253f = L.circleMarker(
+                [49.207660141990125, 16.603942621596122],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f125d8d48ab3d43d48c52a16d549253f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001327<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eef9d9c6d789b3b552e6962f1711d29e = L.circleMarker(
+                [49.19192099778965, 16.618105252338843],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_eef9d9c6d789b3b552e6962f1711d29e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001429<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_60dc04f6ed5d27a3b6ef68050cf75020 = L.circleMarker(
+                [49.20593830839714, 16.60542789475567],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_60dc04f6ed5d27a3b6ef68050cf75020.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001486<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f8104405760490b78303d55e1286d346 = L.circleMarker(
+                [49.18732385838695, 16.59425227899016],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f8104405760490b78303d55e1286d346.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001522<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e8f96f3d8b3fab315e833a44c942133f = L.circleMarker(
+                [49.18774189015207, 16.594279806298363],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e8f96f3d8b3fab315e833a44c942133f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001652<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7fb3ba26098bb983b1db1a7abbb3a81a = L.circleMarker(
+                [49.20593033492819, 16.605443015484393],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_7fb3ba26098bb983b1db1a7abbb3a81a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001828<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9a9441faf08e29269f101a3c190b5639 = L.circleMarker(
+                [49.18733259913567, 16.594424722556223],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_9a9441faf08e29269f101a3c190b5639.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160013<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_89567eb9a116123ed64a8d2d58e9577f = L.circleMarker(
+                [49.20782497832801, 16.604137736952847],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_89567eb9a116123ed64a8d2d58e9577f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160015<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a2a7c6b1b3d972424ef2ca96bbdc0dd7 = L.circleMarker(
+                [49.20771792491716, 16.604206449139355],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_a2a7c6b1b3d972424ef2ca96bbdc0dd7.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160256<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27131be6facf873208dbd7c9ec35a238 = L.circleMarker(
+                [49.20781724772672, 16.604132801011072],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_27131be6facf873208dbd7c9ec35a238.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160304<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4856278d76d6825285cddd0f0361b3a8 = L.circleMarker(
+                [49.20761078559684, 16.604138036000705],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_4856278d76d6825285cddd0f0361b3a8.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160661<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_511af1f400c2cb61f7417ee24384ad0d = L.circleMarker(
+                [49.20302485905325, 16.60719267491141],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_511af1f400c2cb61f7417ee24384ad0d.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160798<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd4fd81d8d07e7363305c45f0730424f = L.circleMarker(
+                [49.203042971125775, 16.60711307541269],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_dd4fd81d8d07e7363305c45f0730424f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161040<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e893d44657c3ab28555f6c6f52e840ba = L.circleMarker(
+                [49.20783110061378, 16.604065616085823],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e893d44657c3ab28555f6c6f52e840ba.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161085<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_189033865cb948a57ae2b6b6b0003342 = L.circleMarker(
+                [49.20765909295483, 16.603972613711665],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_189033865cb948a57ae2b6b6b0003342.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161354<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9b11975d3021ec616637baa8fa3127c = L.circleMarker(
+                [49.18027622054873, 16.595156726650906],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f9b11975d3021ec616637baa8fa3127c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161524<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_484be2a0e8a0f1a8b9228c7c5f502d79 = L.circleMarker(
+                [49.20575899053394, 16.605324640354148],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_484be2a0e8a0f1a8b9228c7c5f502d79.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161577<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_40d9e35ebb070768eee257e1bf3ce99b = L.circleMarker(
+                [49.207823101331726, 16.6042506135808],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_40d9e35ebb070768eee257e1bf3ce99b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161630<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3d367f3250203bf3bc3b98b2231a149c = L.circleMarker(
+                [49.20010278040042, 16.625930775019594],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_3d367f3250203bf3bc3b98b2231a149c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161671<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_64c5da8f1c2dba2f25ba93778b5e23fe = L.circleMarker(
+                [49.19112158073123, 16.611531502993937],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_64c5da8f1c2dba2f25ba93778b5e23fe.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161931<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4a04450a317b9fe51d962bb8e0539113 = L.circleMarker(
+                [49.230430727635394, 16.57785573273437],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_4a04450a317b9fe51d962bb8e0539113.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206162220<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4a29938b721edb964bd10be54439f447 = L.circleMarker(
+                [49.23027272641785, 16.578112737381502],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_4a29938b721edb964bd10be54439f447.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170050<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a42c66f201a14eb28344bddd86c081c = L.circleMarker(
+                [49.23051587507137, 16.578194599608693],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_2a42c66f201a14eb28344bddd86c081c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170053<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4405bd703fd38d28c3eaf3d59600314 = L.circleMarker(
+                [49.20328808537743, 16.60699517183028],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e4405bd703fd38d28c3eaf3d59600314.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170239<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94e7e46f21d84408ef70766e70e59e97 = L.circleMarker(
+                [49.20011377959951, 16.625902767011922],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_94e7e46f21d84408ef70766e70e59e97.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170417<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8113b178a6eb8fb7c9580478c000bbc8 = L.circleMarker(
+                [49.18774661564252, 16.59430572781973],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_8113b178a6eb8fb7c9580478c000bbc8.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170547<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f4b1c7942202627c640feef84f3ea005 = L.circleMarker(
+                [49.23053173809238, 16.578399743173705],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f4b1c7942202627c640feef84f3ea005.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170671<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_23512c73d92fe178ccf507e139995ce1 = L.circleMarker(
+                [49.18031221644125, 16.59526472088496],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_23512c73d92fe178ccf507e139995ce1.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170675<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9023bfab8fda4a73b92e4fd672dfd53d = L.circleMarker(
+                [49.20595100668243, 16.605446643503775],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_9023bfab8fda4a73b92e4fd672dfd53d.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170677<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f2f0502fea5a5ed6bf991af49038a163 = L.circleMarker(
+                [49.19990976840613, 16.625993772140355],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f2f0502fea5a5ed6bf991af49038a163.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170709<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2fb1c38b42567e9ed6878b26d3c0935f = L.circleMarker(
+                [49.20313642591899, 16.60689188060803],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_2fb1c38b42567e9ed6878b26d3c0935f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170928<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4210e82442b980b1c8eb809caf3a2e89 = L.circleMarker(
+                [49.19109609180054, 16.611531372734248],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_4210e82442b980b1c8eb809caf3a2e89.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170994<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2996445514774e2eb9c9b8fd37d7aa61 = L.circleMarker(
+                [49.18733559855461, 16.594578726394282],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_2996445514774e2eb9c9b8fd37d7aa61.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171317<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_301e4fd04125b6b78a35149bb17282ff = L.circleMarker(
+                [49.20010377580863, 16.62598477221038],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_301e4fd04125b6b78a35149bb17282ff.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171553<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33ad7f80dd0d2a00b9cfd3298d89b5da = L.circleMarker(
+                [49.23052424105295, 16.578177785503907],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_33ad7f80dd0d2a00b9cfd3298d89b5da.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171637<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_23473b544953b45d081cd97978388ad3 = L.circleMarker(
+                [49.20319785964829, 16.60687566843976],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_23473b544953b45d081cd97978388ad3.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171698<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6184f35e68421827d245315ad4af838e = L.circleMarker(
+                [49.19105117012555, 16.611443972238916],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_6184f35e68421827d245315ad4af838e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171860<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_721702b624d50faba196893666e7b8b3 = L.circleMarker(
+                [49.18000520337827, 16.595292722767496],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_721702b624d50faba196893666e7b8b3.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206172315<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_16bd9ff0e979b981d78d5cb617bc4d50 = L.circleMarker(
+                [49.20024578474783, 16.626176768008943],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_16bd9ff0e979b981d78d5cb617bc4d50.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206172622<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_978cb939d530dc460642d8d58bfd283e = L.circleMarker(
+                [49.20761708878177, 16.603923624645024],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_978cb939d530dc460642d8d58bfd283e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180375<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f532830f2854d9c2f20e14589a6ede86 = L.circleMarker(
+                [49.2058836851437, 16.605474349334756],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f532830f2854d9c2f20e14589a6ede86.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180599<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07afd9038821dbf61dd0ff0dec28fb72 = L.circleMarker(
+                [49.207619091679135, 16.60430461670714],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_07afd9038821dbf61dd0ff0dec28fb72.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180617<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f3580c75e6e3ab244164b7a81b36d71f = L.circleMarker(
+                [49.19206530296499, 16.61826682939709],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f3580c75e6e3ab244164b7a81b36d71f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180773<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dff97fcc98b2260caa9d3a883a150a9b = L.circleMarker(
+                [49.18748660139831, 16.594431720664026],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_dff97fcc98b2260caa9d3a883a150a9b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180936<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a0d94c36fb778b77c8a62dfd14f2e253 = L.circleMarker(
+                [49.19179528889465, 16.618230833589227],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_a0d94c36fb778b77c8a62dfd14f2e253.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181005<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e3674c26b177ab1024a4a32ec15b8fbb = L.circleMarker(
+                [49.19121122331203, 16.611760807475818],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e3674c26b177ab1024a4a32ec15b8fbb.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181194<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a5e569fc137110b161a7fa2eb3fcdc0 = L.circleMarker(
+                [49.20574099528335, 16.605406641576756],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_1a5e569fc137110b161a7fa2eb3fcdc0.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181322<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_763ca3afbd2258fd26d5f59813baee16 = L.circleMarker(
+                [49.20783209825155, 16.603923617778065],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_763ca3afbd2258fd26d5f59813baee16.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181422<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d9aa81dc197c46afffdca61ccf1e1138 = L.circleMarker(
+                [49.19201930263411, 16.618219827861935],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_d9aa81dc197c46afffdca61ccf1e1138.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181679<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f14ff79922b48d16a210d3ae4a1ed811 = L.circleMarker(
+                [49.187400596329546, 16.594447724552563],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f14ff79922b48d16a210d3ae4a1ed811.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190036<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_178695a1fc13cea8f6887bd06c88049b = L.circleMarker(
+                [49.191070219516575, 16.611738820501788],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_178695a1fc13cea8f6887bd06c88049b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190519<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b901aac6e5bf68a8ff72d9045eda93e2 = L.circleMarker(
+                [49.18794862564463, 16.594341721441698],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_b901aac6e5bf68a8ff72d9045eda93e2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190642<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eedeb8530fbc784800c863920131dc45 = L.circleMarker(
+                [49.23028872104396, 16.578110736221934],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_eedeb8530fbc784800c863920131dc45.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190754<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_99e61a955e2f2d31d6b6681620fb68df = L.circleMarker(
+                [49.191037217811065, 16.611540818622437],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_99e61a955e2f2d31d6b6681620fb68df.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190847<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_89f1dd4c853978a0e9a3caa4913479a7 = L.circleMarker(
+                [49.23028472533608, 16.578150734349638],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_89f1dd4c853978a0e9a3caa4913479a7.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191020<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d2b3a79ea0c5a92c0f6fff2928be1d4b = L.circleMarker(
+                [49.2079121059695, 16.603981614666015],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_d2b3a79ea0c5a92c0f6fff2928be1d4b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191487<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ee1071bb4fd935d7c52d05149459c1ff = L.circleMarker(
+                [49.20791610600494, 16.603992619560763],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_ee1071bb4fd935d7c52d05149459c1ff.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191489<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f390bd3827d763938bd0034bd8963a76 = L.circleMarker(
+                [49.20303262180425, 16.60695093337859],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f390bd3827d763938bd0034bd8963a76.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191518<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5232336859048be851bd852edba69007 = L.circleMarker(
+                [49.19201229692544, 16.617845831611273],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_5232336859048be851bd852edba69007.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191683<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5fae769af4e544887a9f07f2743ab86a = L.circleMarker(
+                [49.18775962426781, 16.59414673172616],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_5fae769af4e544887a9f07f2743ab86a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191900<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e9821ecc1557d24e28bbb30713af7ce2 = L.circleMarker(
+                [49.20774209220738, 16.60422162051086],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e9821ecc1557d24e28bbb30713af7ce2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191951<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fb0024da8af3a4a36d45531549f8505b = L.circleMarker(
+                [49.20592040711135, 16.605473188254525],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_fb0024da8af3a4a36d45531549f8505b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206192082<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c2c248ee6cdd493936c7f064a0589555 = L.circleMarker(
+                [49.23052473569712, 16.57809374113642],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_c2c248ee6cdd493936c7f064a0589555.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206192326<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_87ed43b019d2805290ea0b2304c476e2 = L.circleMarker(
+                [49.19201229531406, 16.618006827564244],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_87ed43b019d2805290ea0b2304c476e2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206200371<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_81d577ef6499c1d4d5978d3de130375c = L.circleMarker(
+                [49.20780909660026, 16.60397861862624],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_81d577ef6499c1d4d5978d3de130375c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206201124<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8876f707e66a3aae5be432330bcad2c7 = L.circleMarker(
+                [49.18017521340817, 16.595162718247778],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_8876f707e66a3aae5be432330bcad2c7.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206202230<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_645c2e1987bd9487fcc63d68475cf93a = L.circleMarker(
+                [49.19213730484456, 16.618366832614736],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_645c2e1987bd9487fcc63d68475cf93a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206210974<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_221aebb6f5c503de858185e465fa5ffb = L.circleMarker(
+                [49.19186929137732, 16.61831782405473],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_221aebb6f5c503de858185e465fa5ffb.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211141<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd2bc2095c666510e092b038a5eaffd1 = L.circleMarker(
+                [49.20776061490494, 16.604398097362687],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_dd2bc2095c666510e092b038a5eaffd1.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211215<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac8f5f7fb2dc9ee23679b6699cdff9f5 = L.circleMarker(
+                [49.2029387026121, 16.606966184368545],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_ac8f5f7fb2dc9ee23679b6699cdff9f5.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211520<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d7d9db201264c4955dcad51f1a4ce31 = L.circleMarker(
+                [49.20564098550231, 16.605599640234658],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_4d7d9db201264c4955dcad51f1a4ce31.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211525<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_816e339754a7a0ded0260e575cf0f67a = L.circleMarker(
+                [49.18738560138896, 16.594577723520672],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_816e339754a7a0ded0260e575cf0f67a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211647<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9be7b1a361f8ae22d7b6309fca4bc465 = L.circleMarker(
+                [49.19995277195088, 16.626186773034775],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_9be7b1a361f8ae22d7b6309fca4bc465.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211865<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac4f1f1a368b472711206cc893f9ab0a = L.circleMarker(
+                [49.19106606410684, 16.611417241552964],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_ac4f1f1a368b472711206cc893f9ab0a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211894<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4af5345c85dab3987ea6396296512e6a = L.circleMarker(
+                [49.23042172607415, 16.578024734499326],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_4af5345c85dab3987ea6396296512e6a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60306191126<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_42fdfad91db9bf324b8e8b89de4cbc2f = L.circleMarker(
+                [49.202956851198216, 16.60692067397319],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_42fdfad91db9bf324b8e8b89de4cbc2f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220127<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_64ae2d311aa73a1e386fd1e1aa968ac6 = L.circleMarker(
+                [49.19195529030249, 16.61785482439998],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_64ae2d311aa73a1e386fd1e1aa968ac6.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220164<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_612819dc8d6ec772fa92f1152d89ed10 = L.circleMarker(
+                [49.20328387112825, 16.60706666685691],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_612819dc8d6ec772fa92f1152d89ed10.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220481<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_029058a89f31731dbc0bfaff45d4f08a = L.circleMarker(
+                [49.18783662472469, 16.594074725614202],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_029058a89f31731dbc0bfaff45d4f08a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221107<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc371a21f30eb2f9821f47d36c80d39b = L.circleMarker(
+                [49.18008321109097, 16.595185724809543],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_bc371a21f30eb2f9821f47d36c80d39b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221302<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8090fc391fa947815b9a8ea05f23637e = L.circleMarker(
+                [49.1875386083214, 16.594328725031094],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_8090fc391fa947815b9a8ea05f23637e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221403<br>Tramvaj: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_39075f7850255faa118fc3b2937b2628 = L.circleMarker(
+                [49.18745360765892, 16.594528731994213],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_39075f7850255faa118fc3b2937b2628.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221444<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4ad3deee2ff053a19b9d35deef39f43 = L.circleMarker(
+                [49.203185862026906, 16.60690267462711],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_e4ad3deee2ff053a19b9d35deef39f43.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221499<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f7472a713fd8925230fdc122aaef5828 = L.circleMarker(
+                [49.18002320359627, 16.5951272153122],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_f7472a713fd8925230fdc122aaef5828.bindTooltip(
+                `<div>
+                     Nehoda ID: 60224225524<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_80d7744537a85bbfec660a6684ae8765 = L.circleMarker(
+                [49.19103321163169, 16.611486816346584],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_80d7744537a85bbfec660a6684ae8765.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190842<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_32689978b8a433401ec56a6466f424f2 = L.circleMarker(
+                [49.191869289536406, 16.61818182168441],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_ad09351cec776d906bd5e2f843a06cf7);
+        
+    
+            circle_marker_32689978b8a433401ec56a6466f424f2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211687<br>Tramvaj: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_59952bc328f318d0e1a5dc12f93c5fe6_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_0b35390db50bd572cae816cf9db91087,
+                },
+                overlays :  {
+                    "Top 10 Clustre (\u0161ed\u00e9)" : feature_group_d74ebe0affb5d75198aafd2398d62df9,
+                    "Nehody v clustroch (\u010derven\u00e9/svetl\u00e9)" : feature_group_ad09351cec776d906bd5e2f843a06cf7,
+                },
+            };
+            let layer_control_59952bc328f318d0e1a5dc12f93c5fe6 = L.control.layers(
+                layer_control_59952bc328f318d0e1a5dc12f93c5fe6_layers.base_layers,
+                layer_control_59952bc328f318d0e1a5dc12f93c5fe6_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_38f6597d80f498965605e766c53da223);
+
+        
+</script>
+</html>

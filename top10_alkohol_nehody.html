@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d6916c595203ee31143d78d2f78e331a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 440px;
+    max-height: 520px;
+    overflow-y: auto;
+    background-color: white;
+    border: 2px solid gray;
+    padding: 10px;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+">
+<h4 style="text-align:center; margin-top:0; margin-bottom:10px;">Top 10 nejproblematičtějších úseku z pohledu alkoholu</h4>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 420px;
+            font-size: 13px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 6px 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        tbody {
+            display: block;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        thead, tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+    </style>
+    <table><thead><tr><th>Cluster</th><th>Počet nehod celkovo</th><th>Počet nehod s alkoholem</th></tr></thead><tbody><tr><td>Královo Pole_115</td><td>21</td><td>6</td></tr><tr><td>Líšeň_106</td><td>8</td><td>4</td></tr><tr><td>Brno-střed_707</td><td>9</td><td>4</td></tr><tr><td>Slatina_45</td><td>9</td><td>3</td></tr><tr><td>Slatina_194</td><td>10</td><td>3</td></tr><tr><td>Židenice_380</td><td>9</td><td>3</td></tr><tr><td>Brno-střed_53</td><td>11</td><td>3</td></tr><tr><td>Brno-sever_114</td><td>4</td><td>3</td></tr><tr><td>Židenice_63</td><td>11</td><td>3</td></tr><tr><td>Maloměřice a Obřany_15</td><td>2</td><td>2</td></tr></tbody></table>
+</div>
+    
+            <div class="folium-map" id="map_d6916c595203ee31143d78d2f78e331a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d6916c595203ee31143d78d2f78e331a = L.map(
+                "map_d6916c595203ee31143d78d2f78e331a",
+                {
+                    center: [49.19828413196576, 16.605177614025916],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f366c59cec564996ce3ee27b727b4883 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f366c59cec564996ce3ee27b727b4883.addTo(map_d6916c595203ee31143d78d2f78e331a);
+        
+    
+            var feature_group_c859bc7cb37e75f62b2186bdf6e604a2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_21abbcd657986d37021e20d5bbc0fc42 = L.circleMarker(
+                [49.22796875061065, 16.61624259931281],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_21abbcd657986d37021e20d5bbc0fc42.bindTooltip(
+                `<div>
+                     Cluster: Brno-sever_114<br>Nehody s alkoholem: 3<br>Celkovo nehôd: 4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5bbfd7faf5253f5090f20d6fb45754a3 = L.circleMarker(
+                [49.19599365325591, 16.615633689879914],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_5bbfd7faf5253f5090f20d6fb45754a3.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_53<br>Nehody s alkoholem: 3<br>Celkovo nehôd: 11
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_73c41c8f3e774bbdd34a7ccbc6cf51a2 = L.circleMarker(
+                [49.19916600033089, 16.605374659157032],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_73c41c8f3e774bbdd34a7ccbc6cf51a2.bindTooltip(
+                `<div>
+                     Cluster: Brno-střed_707<br>Nehody s alkoholem: 4<br>Celkovo nehôd: 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8d9ca3623d1a6b6bde7c95c06a169668 = L.circleMarker(
+                [49.21540364796626, 16.599787843725863],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_8d9ca3623d1a6b6bde7c95c06a169668.bindTooltip(
+                `<div>
+                     Cluster: Královo Pole_115<br>Nehody s alkoholem: 6<br>Celkovo nehôd: 21
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_550ea46a5e86c7a78bb5e5228648115a = L.circleMarker(
+                [49.21362786152655, 16.686485946507823],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_550ea46a5e86c7a78bb5e5228648115a.bindTooltip(
+                `<div>
+                     Cluster: Líšeň_106<br>Nehody s alkoholem: 4<br>Celkovo nehôd: 8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_520d40a1c7ad5b3242e38373a5d855c5 = L.circleMarker(
+                [49.21900722093496, 16.63924313224416],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_520d40a1c7ad5b3242e38373a5d855c5.bindTooltip(
+                `<div>
+                     Cluster: Maloměřice a Obřany_15<br>Nehody s alkoholem: 2<br>Celkovo nehôd: 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f89f19b5791d465b8eb3169febe8ea50 = L.circleMarker(
+                [49.17310557212345, 16.68291430986939],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_f89f19b5791d465b8eb3169febe8ea50.bindTooltip(
+                `<div>
+                     Cluster: Slatina_194<br>Nehody s alkoholem: 3<br>Celkovo nehôd: 10
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_02ac3cee7665cfaa6b46897ed0d23b1d = L.circleMarker(
+                [49.18226384214164, 16.69208873318598],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_02ac3cee7665cfaa6b46897ed0d23b1d.bindTooltip(
+                `<div>
+                     Cluster: Slatina_45<br>Nehody s alkoholem: 3<br>Celkovo nehôd: 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_da5af655a780451ce7072e9258cc34c5 = L.circleMarker(
+                [49.2019807618246, 16.642995637254636],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_da5af655a780451ce7072e9258cc34c5.bindTooltip(
+                `<div>
+                     Cluster: Židenice_380<br>Nehody s alkoholem: 3<br>Celkovo nehôd: 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fdbda6abe61e67c4d119246c48a6e37e = L.circleMarker(
+                [49.189384786658756, 16.663015591072874],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c859bc7cb37e75f62b2186bdf6e604a2);
+        
+    
+            circle_marker_fdbda6abe61e67c4d119246c48a6e37e.bindTooltip(
+                `<div>
+                     Cluster: Židenice_63<br>Nehody s alkoholem: 3<br>Celkovo nehôd: 11
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_c859bc7cb37e75f62b2186bdf6e604a2.addTo(map_d6916c595203ee31143d78d2f78e331a);
+        
+    
+            var feature_group_23a9ac58f66dbeba5523043545c43da1 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_cc8cd38e8b65c753ac72c728d3f5fa5f = L.circleMarker(
+                [49.17318935473491, 16.68287945060912],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_cc8cd38e8b65c753ac72c728d3f5fa5f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000030<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_430462aa6ae516ab6f02dc5d421b112c = L.circleMarker(
+                [49.21360071644802, 16.68626653017465],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_430462aa6ae516ab6f02dc5d421b112c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000369<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e774302edcd3f40460ada7191e97bdf1 = L.circleMarker(
+                [49.21548787021004, 16.59982743792133],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e774302edcd3f40460ada7191e97bdf1.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000434<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fd9e7f490c8544feac7e6396b3cccaff = L.circleMarker(
+                [49.22795903401423, 16.61636147321703],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_fd9e7f490c8544feac7e6396b3cccaff.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223000821<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1416902d61c74d6400d9408363c2725d = L.circleMarker(
+                [49.21545524370309, 16.59974998454841],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_1416902d61c74d6400d9408363c2725d.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001080<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2c261f5688d010917fc0f5452ec74d2b = L.circleMarker(
+                [49.228029592787024, 16.616336026040376],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_2c261f5688d010917fc0f5452ec74d2b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001306<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_63f40dc2bfa35d1d1800d012bdcd37f0 = L.circleMarker(
+                [49.21546902195404, 16.59981674452793],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_63f40dc2bfa35d1d1800d012bdcd37f0.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001347<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2191a8bd670c82ef3bc9e156989cf39f = L.circleMarker(
+                [49.19932137240259, 16.605484809162956],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_2191a8bd670c82ef3bc9e156989cf39f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001427<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1ea0b08c43b29d3af0e0d1b97b7ec79c = L.circleMarker(
+                [49.18234556627896, 16.691951253664328],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_1ea0b08c43b29d3af0e0d1b97b7ec79c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001482<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5921ef926159df77234baa382e0e4a00 = L.circleMarker(
+                [49.21545454691937, 16.60012289527829],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_5921ef926159df77234baa382e0e4a00.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001514<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_46b7a9e1dae010690a352938fcac45f7 = L.circleMarker(
+                [49.21348957204852, 16.68661601769158],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_46b7a9e1dae010690a352938fcac45f7.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001704<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6f813943490bbf791bc297f7c2d1e23a = L.circleMarker(
+                [49.18938728003208, 16.663066644707257],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_6f813943490bbf791bc297f7c2d1e23a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60223001782<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b56ede46f789094e80f08301502463ad = L.circleMarker(
+                [49.19607495320408, 16.615518096296125],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_b56ede46f789094e80f08301502463ad.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160067<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f1081ae7b5b94847984c08320b598cb1 = L.circleMarker(
+                [49.21538002282273, 16.599936727864783],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_f1081ae7b5b94847984c08320b598cb1.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160205<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b91f4d23ff02db00d7147720df90ec0 = L.circleMarker(
+                [49.189533351577886, 16.66294799715957],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_2b91f4d23ff02db00d7147720df90ec0.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160274<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_056003fde0b575167512ffcc1890305b = L.circleMarker(
+                [49.20197091761489, 16.643021752886288],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_056003fde0b575167512ffcc1890305b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160488<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a543aad79aafd62a565951afe8226e9b = L.circleMarker(
+                [49.18212756256235, 16.691950622326647],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_a543aad79aafd62a565951afe8226e9b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160590<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_af9889a4cf899d4f03e58c3b40e0d016 = L.circleMarker(
+                [49.182148059916514, 16.692098179745162],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_af9889a4cf899d4f03e58c3b40e0d016.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160591<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc95743bfb33dc4788c202662098a4c8 = L.circleMarker(
+                [49.20199496049623, 16.643022813260554],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_fc95743bfb33dc4788c202662098a4c8.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206160716<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2623368dd2a7c3130d8931ecad5e0876 = L.circleMarker(
+                [49.2138627753625, 16.686534838230454],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_2623368dd2a7c3130d8931ecad5e0876.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161005<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e8606dfb2bbea461c641f67f9f56c577 = L.circleMarker(
+                [49.1822522855796, 16.69210557331102],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e8606dfb2bbea461c641f67f9f56c577.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161075<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_26043df5fa373d4a82227420fa096b2a = L.circleMarker(
+                [49.19607769982064, 16.61560608420344],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_26043df5fa373d4a82227420fa096b2a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161094<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9a3ffc29264a0373d5342bad4da3076 = L.circleMarker(
+                [49.18943607484128, 16.662904365614324],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_f9a3ffc29264a0373d5342bad4da3076.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161144<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_58264371bb030f2eacec0524ee9972b6 = L.circleMarker(
+                [49.19911863887776, 16.605240712294417],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_58264371bb030f2eacec0524ee9972b6.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161268<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_95426d0eb84f5452cd9c5eccf2994422 = L.circleMarker(
+                [49.18937834500437, 16.662928009365796],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_95426d0eb84f5452cd9c5eccf2994422.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161437<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f601dc37baf26369d384177f38b853be = L.circleMarker(
+                [49.19915407576162, 16.605486347743362],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_f601dc37baf26369d384177f38b853be.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161653<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fbeb5cbcaa9cfc17788d2ffaaf696979 = L.circleMarker(
+                [49.17319645774384, 16.682904608899612],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_fbeb5cbcaa9cfc17788d2ffaaf696979.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206161757<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_692a21b9eb5c2d3e9980833162b998e2 = L.circleMarker(
+                [49.18930371806711, 16.663058271131234],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_692a21b9eb5c2d3e9980833162b998e2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206162061<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f3c93ddbcac2d92df449da1892bf6183 = L.circleMarker(
+                [49.18939171863368, 16.663103878004097],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_f3c93ddbcac2d92df449da1892bf6183.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206162195<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e07f5c60e63dfcd7340948c434e32c9 = L.circleMarker(
+                [49.173078495113614, 16.683003237788732],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_5e07f5c60e63dfcd7340948c434e32c9.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206162200<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4056f98b345d9737a6c57d352be26039 = L.circleMarker(
+                [49.215392023643744, 16.59961673714002],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_4056f98b345d9737a6c57d352be26039.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170260<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88f6e1fc92212f63d9840f1d532360ac = L.circleMarker(
+                [49.21523101368699, 16.599770736541416],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_88f6e1fc92212f63d9840f1d532360ac.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206170584<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e56b520873fafd95eec32198b9f22d3a = L.circleMarker(
+                [49.19606264435613, 16.615450910185984],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e56b520873fafd95eec32198b9f22d3a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171113<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_22519defad8584da827cc0426f6149d4 = L.circleMarker(
+                [49.20192995086612, 16.643070802351794],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_22519defad8584da827cc0426f6149d4.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171456<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8fea5dda3f7ab98f003d8dde763e25bb = L.circleMarker(
+                [49.1957124897111, 16.61577877727253],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_8fea5dda3f7ab98f003d8dde763e25bb.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171841<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b2e15ede0415083e0f872593d00983f8 = L.circleMarker(
+                [49.1957885029744, 16.615980779039187],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_b2e15ede0415083e0f872593d00983f8.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171955<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f761cdee90c51518ecd7e1cbdbb77e88 = L.circleMarker(
+                [49.196119775883226, 16.61556556948942],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_f761cdee90c51518ecd7e1cbdbb77e88.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171989<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_90f549423f47753bba9ade6bcab466af = L.circleMarker(
+                [49.201855947889406, 16.642901813979723],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_90f549423f47753bba9ade6bcab466af.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206171992<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e120b4766ea38298461016e7ee21fc7c = L.circleMarker(
+                [49.215466020130776, 16.599969727708473],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e120b4766ea38298461016e7ee21fc7c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206172096<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05cbe9f2f6bfc0d4202f9e83d6851a19 = L.circleMarker(
+                [49.20196995773273, 16.64292480858576],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_05cbe9f2f6bfc0d4202f9e83d6851a19.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206172112<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07dad8133ec7c5c58819a6872c19b5f9 = L.circleMarker(
+                [49.18934834383096, 16.66303400097731],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_07dad8133ec7c5c58819a6872c19b5f9.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180268<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd4c0bbc42851e4022ef6cbaedf46b4a = L.circleMarker(
+                [49.19911563331138, 16.605419717973962],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_dd4c0bbc42851e4022ef6cbaedf46b4a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180342<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_95463d9ae87720f2533fd08166b218fc = L.circleMarker(
+                [49.21545002117544, 16.599770729788837],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_95463d9ae87720f2533fd08166b218fc.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206180419<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d8fd806c8e644d0b0d85e490d8561a58 = L.circleMarker(
+                [49.21532101995502, 16.599529732300862],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_d8fd806c8e644d0b0d85e490d8561a58.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181281<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba1ecec7e2df00cf974e56c6867312d3 = L.circleMarker(
+                [49.21546402693934, 16.599445726590186],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_ba1ecec7e2df00cf974e56c6867312d3.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181483<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6f89c5499d39db5a646eaafe9536694e = L.circleMarker(
+                [49.18957536055123, 16.66285699648014],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_6f89c5499d39db5a646eaafe9536694e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181484<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_df46579a515ca56101a5513282d27cff = L.circleMarker(
+                [49.215407478393445, 16.599814816799082],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_df46579a515ca56101a5513282d27cff.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181668<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_22fd74084e04670e25789b80d19d9b60 = L.circleMarker(
+                [49.21538902320783, 16.59981272942962],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_22fd74084e04670e25789b80d19d9b60.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181719<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48d0a15e7d54e5a6c2cf4fb6d75ded9a = L.circleMarker(
+                [49.18926933857668, 16.66310899820345],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_48d0a15e7d54e5a6c2cf4fb6d75ded9a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181759<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fff6eaab00dd83a790141789a38f526c = L.circleMarker(
+                [49.17318079818644, 16.682894504552426],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_fff6eaab00dd83a790141789a38f526c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181822<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7cff3f6163a154b131d8e1ec36fcd366 = L.circleMarker(
+                [49.18251582506478, 16.691887261319554],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_7cff3f6163a154b131d8e1ec36fcd366.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206181835<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_776ffcef5ff18acdbb019bb4298fa58f = L.circleMarker(
+                [49.21361676658115, 16.68660583144421],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_776ffcef5ff18acdbb019bb4298fa58f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206182071<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2c2a0244c2952116b6a4032924a9c8d1 = L.circleMarker(
+                [49.18932734495209, 16.663079003367734],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_2c2a0244c2952116b6a4032924a9c8d1.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206182257<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5a22a2714e687b89cbc09d606d231f97 = L.circleMarker(
+                [49.17300448599648, 16.68263623255157],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_5a22a2714e687b89cbc09d606d231f97.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206182503<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a39c8390b1460957b768cfff00516290 = L.circleMarker(
+                [49.17322043541128, 16.6828685791784],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_a39c8390b1460957b768cfff00516290.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206182512<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b880feb3df07fc01c1a5d0c9785603f = L.circleMarker(
+                [49.17319922566437, 16.68288877646318],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_3b880feb3df07fc01c1a5d0c9785603f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190181<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5269edce4231f46b2549938c5d1dcd66 = L.circleMarker(
+                [49.21357176108722, 16.686713839930302],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_5269edce4231f46b2549938c5d1dcd66.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190590<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_47493ba835de82df8effc531bfb021e6 = L.circleMarker(
+                [49.17297348927288, 16.682757234292225],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_47493ba835de82df8effc531bfb021e6.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190656<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ecdbbd903fc86b0b4e845843f9804f8 = L.circleMarker(
+                [49.21542002503412, 16.59984073127953],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_9ecdbbd903fc86b0b4e845843f9804f8.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190736<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d6c284dfe06b6a11861a620249f448b5 = L.circleMarker(
+                [49.18928177717903, 16.663083336790717],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_d6c284dfe06b6a11861a620249f448b5.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190835<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_91c5b7fccf831ab24738f6780c67315f = L.circleMarker(
+                [49.19920263831507, 16.605247703851813],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_91c5b7fccf831ab24738f6780c67315f.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206190865<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_595ebc0928d8bf9464951c8352aa3dbe = L.circleMarker(
+                [49.21530202054659, 16.59974373492132],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_595ebc0928d8bf9464951c8352aa3dbe.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191163<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_901254d0389dc298c593ab307716a86e = L.circleMarker(
+                [49.1821710691238, 16.69226117913613],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_901254d0389dc298c593ab307716a86e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206191574<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_212312c196beed82dd3ef775eb2169f2 = L.circleMarker(
+                [49.18224606933692, 16.692372179513217],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_212312c196beed82dd3ef775eb2169f2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206192018<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b7e8291fbe05fd9b667f9dfb50fdf78 = L.circleMarker(
+                [49.18224606933692, 16.692372179513217],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_9b7e8291fbe05fd9b667f9dfb50fdf78.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206192021<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_20c87b46ff9a6496a7f2ac23677a55df = L.circleMarker(
+                [49.20208596530362, 16.642873809892997],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_20c87b46ff9a6496a7f2ac23677a55df.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206200281<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_200e044b1d9637f47caaa86a8a6a235b = L.circleMarker(
+                [49.22804619311139, 16.616280449330525],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_200e044b1d9637f47caaa86a8a6a235b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206200836<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ce614f257838bbbf9f389e4f736cc129 = L.circleMarker(
+                [49.21542579630391, 16.59971596830733],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_ce614f257838bbbf9f389e4f736cc129.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206201191<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_57f9ad8b3f68075cb85dbe4ac7e6e5eb = L.circleMarker(
+                [49.20212496686121, 16.642807801927336],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_57f9ad8b3f68075cb85dbe4ac7e6e5eb.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206201597<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ecb6a946ee6a90dbd2c1d233adace2e3 = L.circleMarker(
+                [49.19610882873864, 16.615597599433208],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_ecb6a946ee6a90dbd2c1d233adace2e3.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206202149<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b5b3ec46c8df905f053c6e134f6b95a = L.circleMarker(
+                [49.19604250754911, 16.615492777234902],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_9b5b3ec46c8df905f053c6e134f6b95a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206210350<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6fa72a60bd0bc620dbd36802fa54755e = L.circleMarker(
+                [49.21520400805153, 16.599768736300586],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_6fa72a60bd0bc620dbd36802fa54755e.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206210509<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_371ba7ecaa693c8354d714110fadf2a2 = L.circleMarker(
+                [49.19613377945675, 16.615633442466468],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_371ba7ecaa693c8354d714110fadf2a2.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211002<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e0eb6cc46de464bf3570c4ba43e5e2e1 = L.circleMarker(
+                [49.2155410270121, 16.59991672909161],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e0eb6cc46de464bf3570c4ba43e5e2e1.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211040<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4cf368f32e9746034d349814c58c5ff = L.circleMarker(
+                [49.19900563014378, 16.605490710142934],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e4cf368f32e9746034d349814c58c5ff.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211265<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3bee7474e338f730ce68bc1676a63fee = L.circleMarker(
+                [49.18232207207491, 16.691800170144553],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_3bee7474e338f730ce68bc1676a63fee.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211543<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37650359b076aa70823429836ee60680 = L.circleMarker(
+                [49.21545344422884, 16.599759049439037],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_37650359b076aa70823429836ee60680.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211655<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_df5e15726faca510163bbec829b5694c = L.circleMarker(
+                [49.19589450298676, 16.6158927820765],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_df5e15726faca510163bbec829b5694c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206211781<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e82b324b92331048676a7acc43557375 = L.circleMarker(
+                [49.21361876525232, 16.686154837390077],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e82b324b92331048676a7acc43557375.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206212048<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0434ea155a1bacf26f0825d810901e0c = L.circleMarker(
+                [49.21364476845684, 16.68654383942176],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_0434ea155a1bacf26f0825d810901e0c.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206212130<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_da3fec241dc64bcc0dd3e1cc67376b3b = L.circleMarker(
+                [49.213617766975794, 16.686451837779554],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_da3fec241dc64bcc0dd3e1cc67376b3b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220148<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_792361fb1ab6a19af8e8dc193bfa79e9 = L.circleMarker(
+                [49.1730874916991, 16.683196234039645],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_792361fb1ab6a19af8e8dc193bfa79e9.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220342<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4662a958ac17778f6ae5e7ee78adf2e7 = L.circleMarker(
+                [49.202050961202815, 16.643268811377563],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_4662a958ac17778f6ae5e7ee78adf2e7.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220428<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b960afd70dafd9bfb7aea46430a98674 = L.circleMarker(
+                [49.21534302174051, 16.599873735484106],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_b960afd70dafd9bfb7aea46430a98674.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220688<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88dad172b68d9e99082ca51c0c0d161d = L.circleMarker(
+                [49.17292548741157, 16.68311424031898],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_88dad172b68d9e99082ca51c0c0d161d.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220795<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0577d7df65d80603d42a4a031fea3a07 = L.circleMarker(
+                [49.199194639439376, 16.60522571137383],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_0577d7df65d80603d42a4a031fea3a07.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206220891<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88b339aad4303e92c7da324624f7b104 = L.circleMarker(
+                [49.227840182529945, 16.61599244866331],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_88b339aad4303e92c7da324624f7b104.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221098<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4d73f51827dccaa6060bde8aa6d21f5 = L.circleMarker(
+                [49.21541993163216, 16.599741306980338],
+                {"bubblingMouseEvents": true, "color": "lightgray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_e4d73f51827dccaa6060bde8aa6d21f5.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221104<br>Alkohol: ne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f26a600b7ed95b532a77dee9ad275154 = L.circleMarker(
+                [49.19927263941933, 16.60522871037023],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_f26a600b7ed95b532a77dee9ad275154.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221410<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c367459cd3438b7e1850857ee8534123 = L.circleMarker(
+                [49.19910873530707, 16.605547509499786],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_c367459cd3438b7e1850857ee8534123.bindTooltip(
+                `<div>
+                     Nehoda ID: 60225224849<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_39d84f9d5a949232aa52df6cb53f9c6b = L.circleMarker(
+                [49.20184322845436, 16.643068321029716],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_39d84f9d5a949232aa52df6cb53f9c6b.bindTooltip(
+                `<div>
+                     Nehoda ID: 60226220045<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b1085e5497f7b9faea8af6637c6852a = L.circleMarker(
+                [49.195914501134204, 16.615453770981283],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_2b1085e5497f7b9faea8af6637c6852a.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221185<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9d7e18108432cf66fb8e2653c77239b9 = L.circleMarker(
+                [49.21881182940604, 16.639223626134847],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_9d7e18108432cf66fb8e2653c77239b9.bindTooltip(
+                `<div>
+                     Nehoda ID: 60206221817<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_438558925fa691c6d77a3d86f0c37d81 = L.circleMarker(
+                [49.21920261246388, 16.63926263835348],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 1}
+            ).addTo(feature_group_23a9ac58f66dbeba5523043545c43da1);
+        
+    
+            circle_marker_438558925fa691c6d77a3d86f0c37d81.bindTooltip(
+                `<div>
+                     Nehoda ID: 60224223816<br>Alkohol: ano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_55c3cdbd9aeec74c269535d7994f54bd_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_f366c59cec564996ce3ee27b727b4883,
+                },
+                overlays :  {
+                    "Top 10 Clustre (\u0161ed\u00e9)" : feature_group_c859bc7cb37e75f62b2186bdf6e604a2,
+                    "Nehody v clustroch (\u010derven\u00e9/svetl\u00e9)" : feature_group_23a9ac58f66dbeba5523043545c43da1,
+                },
+            };
+            let layer_control_55c3cdbd9aeec74c269535d7994f54bd = L.control.layers(
+                layer_control_55c3cdbd9aeec74c269535d7994f54bd_layers.base_layers,
+                layer_control_55c3cdbd9aeec74c269535d7994f54bd_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_d6916c595203ee31143d78d2f78e331a);
+
+        
+</script>
+</html>
